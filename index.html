@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Partnerships</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --muted: #888888;
+            --accent: #5AC33E;
+            --light-gray: #f7f7f7;
+            --border: #e8e8e8;
+            --yes: #5AC33E;
+            --no: #dedede;
+            --tbd: #f5a623;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 1.5rem;
+            line-height: 1.4;
+            width: 100vw;
+            height: 56.25vw; /* 16:9 = 100/56.25 */
+            max-height: 100vh;
+            max-width: 177.78vh; /* 16:9 inverse */
+            margin: 0 auto;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 660px;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: 1.65rem;
+            margin-bottom: 0.1rem;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .subheadline {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.35;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 1.1rem;
+            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .legend .dot {
+            width: 12px;
+            height: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        /* Header styling */
+        th {
+            text-align: left;
+            font-weight: 600;
+            padding: 0.15rem 0.35rem;
+            vertical-align: middle;
+        }
+
+        th.provider-header {
+            text-align: center;
+            font-weight: 600;
+            color: var(--muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding-bottom: 0.1rem;
+            background: var(--light-gray);
+            border-left: 1.5px solid #6D686E;
+        }
+
+        th.provider {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.15rem 0.3rem;
+            width: 65px;
+        }
+
+        th.provider:first-of-type {
+            border-left: 2px solid var(--text);
+        }
+
+        thead tr:last-child th {
+            border-bottom: 1.5px solid #6D686E;
+        }
+
+        th.col-category {
+            width: 75px;
+            font-size: 0.85rem;
+        }
+
+        th.col-company {
+            width: 70px;
+            font-size: 0.85rem;
+        }
+
+        /* Body styling */
+        td {
+            padding: 0.15rem 0.35rem;
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr.section-start td {
+            border-top: 1.5px solid #6D686E;
+        }
+
+        td.category {
+            font-weight: 600;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            vertical-align: middle;
+            background: var(--light-gray);
+        }
+
+        td.company {
+            font-weight: 500;
+            width: 70px;
+        }
+
+        td.status {
+            text-align: center;
+            vertical-align: middle;
+            width: 70px;
+        }
+
+        td.status.first-provider,
+        th.first-provider {
+            border-left: 1.5px solid #6D686E;
+        }
+
+        /* Status indicators */
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot.yes {
+            background: var(--yes);
+        }
+
+        .dot.no {
+            background: var(--no);
+        }
+
+        .dot.tbd {
+            background: #d4920a;
+        }
+
+        .tbd {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #d4920a;
+            letter-spacing: 0.02em;
+        }
+
+        .source {
+            font-size: 0.565rem;
+            color: var(--muted);
+            font-family: 'SF Mono', 'Consolas', monospace;
+            letter-spacing: 0.02em;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+            
+            h1 {
+                font-size: 1.25rem;
+            }
+
+            .subheadline {
+                font-size: 0.9rem;
+            }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 0.4rem 0.3rem;
+            }
+
+            th.col-category {
+                width: 65px;
+            }
+
+            th.col-company {
+                width: 75px;
+            }
+
+            .dot {
+                width: 11px;
+                height: 11px;
+            }
+
+            .legend {
+                gap: 0.9rem;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Unlikely Allies</h1>
+        <p class="subheadline">A look at AI provider partnerships across payments and retail.</p>
+        
+        <div class="legend">
+            <div class="legend-item"><span class="dot yes"></span> Partnership</div>
+            <div class="legend-item"><span class="dot tbd"></span> Discussed partnership</div>
+            <div class="legend-item"><span class="dot no"></span> None</div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th class="provider-header" colspan="4">AI Provider</th>
+                </tr>
+                <tr>
+                    <th class="col-category"></th>
+                    <th class="col-company">Company</th>
+                    <th class="provider first-provider">Amazon</th>
+                    <th class="provider">Google</th>
+                    <th class="provider">Microsoft</th>
+                    <th class="provider">OpenAI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="category" rowspan="3">Payments</td>
+                    <td class="company">PayPal</td>
+                    <td class="status first-provider"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                </tr>
+                <tr>
+                    <td class="company">Shopify*</td>
+                    <td class="status first-provider"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                </tr>
+                <tr>
+                    <td class="company">Stripe</td>
+                    <td class="status first-provider"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                </tr>
+                <tr class="section-start">
+                    <td class="category" rowspan="5">Retailers</td>
+                    <td class="company">Amazon</td>
+                    <td class="status first-provider"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot tbd"></span></td>
+                </tr>
+                <tr>
+                    <td class="company">Etsy</td>
+                    <td class="status first-provider"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                </tr>
+                <tr>
+                    <td class="company">Shopify</td>
+                    <td class="status first-provider"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                </tr>
+                <tr>
+                    <td class="company">Target</td>
+                    <td class="status first-provider"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                </tr>
+                <tr>
+                    <td class="company">Walmart</td>
+                    <td class="status first-provider"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                    <td class="status"><span class="dot no"></span></td>
+                    <td class="status"><span class="dot yes"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p class="source">* Stripe is a major processor for Shopify, and PayPal also handles some payments. Source: The Information reporting</p>
+    </div>
+</body>
+</html>
